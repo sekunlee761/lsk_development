@@ -1,0 +1,67 @@
+1) 명세표 작성: 개발 명세서 텍스트 파일을 추가하고 첨부 개발 명세서 바탕으로 md 파일 만들어줘.
+
+2) 첨부 명세서 파일을 바탕으로 prd와 trd를 작성해줘.
+
+3) 프로젝트 rules 생성: prd, trd를 참고해서 '001-project-rules'를 만들어줄래?
+prd, trd를 참고해서 항상 적용되는 프로젝트 Rule '001-project-rules'를 만들어줄래?
+
+4) Task.md 생성
+TRD 내용과 PRD 내용을 잘 조합해서 Task 단위로 생성해줘. 
+이때 Task는 난이도가 표시되며, 난이도는 10점 만점으로 계산해줘.
+이때 8점 이상인 경우는 Task를 Sub-Task로 분리해서 최종적으로는 난이도가 8점 이상인 Task가 없도록 해줘.
+
+5) 초기설정
+001-project-rules.md rule를 바탕으로 초기 설정, 폴더 및 파일 생성해줄래?
+
+6) Task 실행
+Task.md 내용을 바탕으로 개발 진행해줘. 이때 스스로 계획을 세우고 진행해줄래?
+
+
+Git 연결
+3. 로컬 폴더에 GitHub 레포 연결 (가장 중요)
+이제 실제로 특정 폴더 아래에 Git 환경을 만드는 단계입니다.
+
+✅ 방법 1 (가장 권장): GitHub → Clone → Visual Studio
+3.1 Visual Studio 2022 실행
+Start Window → Clone a repository
+
+3.2 Repository URL 입력
+https://github.com/sekunlee761/lsk_development.git
+
+3.3 Local Path 설정
+Plain TextD:\GitRepos\lsk_development더 많은 선 표시
+✅ 결과 구조:
+Plain TextD:\GitRepos\ └─ lsk_development\    ├─ .github\    │   └─ copilot-instructions.md    ├─ src\    ├─ lsk_development.sln    └─ .git\더 많은 선 표시
+📌 이 구조가 바이브 코딩에 최적
+
+✅ 방법 2: 이미 폴더가 있을 경우 (수동 초기화)
+이미 작업 중인 폴더라면 다음 순서로 합니다.
+3.4 PowerShell에서 해당 폴더 이동
+PowerShellcd D:\GitRepos\lsk_development더 많은 선 표시
+3.5 Git 초기화
+PowerShellgit init더 많은 선 표시
+3.6 원격 GitHub 레포 연결
+PowerShellgit remote add origin https://github.com/sekunlee761/lsk_development.git더 많은 선 표시
+3.7 최초 동기화
+PowerShellgit pull origin main``더 많은 선 표시
+
+4. Visual Studio 2022와 Git 연동 확인
+✅ 4.1 Git Repository 창
+View → Git Repository
+
+여기에:
+
+브랜치 (main)
+커밋 히스토리
+변경 파일
+
+이 보이면 ✅ 정상 연동
+
+✅ 4.2 Git Changes 창
+View → Git Changes
+
+
+파일 수정 시 자동 반영
+Copilot 생성 코드도 즉시 추적됨
+
+

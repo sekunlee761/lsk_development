@@ -1,0 +1,601 @@
+BGA 볼 검사 클라이언트 프로그램을 개발하려고해.
+먼저 카메라에서 취득한 이미지로 검사 알고리즘을 개발하려고 해.
+BGA 볼검사에 최적화되어 있는 고성능 모델 추천해 줘.
+
+Visual studio 스타일 처럼 윈도우를 도킹하여 상,하,좌,우 배치할 수 있도록 해줘.
+
+TRD, PRD 업데이트해줘.
+TRD, PRD 바탕으로 프로젝트 Rule "project-001" 만들어줘.
+
+현재 프로젝트 설정 기반으로 TRD, PRD 업데이트해줘.
+TRD, PRD 바탕으로 프로젝트 Rule "project-001" 업데이트 해줘.
+TRD, PRD 바탕으로 프로젝트 Rule "001-project-rules.md" 업데이트 해줘.
+
+모든 윈폼 및 새로 생성하는 윈폼은 직접 편집 가능하도록 .Designer.cs도 생성해 주세요.
+
+프로젝트에서 경로를 효율적으로 관리할수 있는 경로 관리자 만들어줘.
+시간이 많이 소요되는 작업은 비동기로 처리를 우선하기 위한 스래드 매니저를 설계해줘. 다형형을 적용하고 베이스 클래스를 상속 받은 워크 스래드와 스래드 매니저 클래스로 만들어줘. 스래드는 비동기로 설계해줘.
+시퀀스 설계에서 사용할 타이머 관리자 설계해줘. 다형형을 적용하고 베이스 클래스를 상속 받은 타이머 클래스로 만들어줘. 타이머 동작은 고속, 정밀 타이머, loop 타이머, off 타이머, on 타이머로 우선 설계해줘.
+각 워커 스래드에서 사용할 수 있도록 스래드 세이프하게 설계해줘.
+프로젝트에서 경로를 효율적으로 관리할수 있는 파일 관리자 만들어줘.
+프로젝트에서 통신를 효율적으로 관리할수 있는 통신 관리자 만들어줘. 다형형을 적용하고 베이스 클래스를 상속 받은 통신 클래스로 만들어줘. 통신은 비동기 소켓 통신 (서버, 클라이언트), 시리얼 통신으로 설계해줘.
+프로젝트에서 레시피 효율적으로 관리할수 있는 레시피 관리자 만들어줘. 다형형을 적용하고 베이스 클래스를 상속 받은 레시피 클래스로 만들어줘. 레시피는 패턴 매칭용 모델, 설정 파일을 관리할수 있게 설계해줘.
+프로그램 시작 시 이전 마지막 레시피를 자동 로딩하게하고, 새로운 레시피를 생성, 기존 레시피 복사, 수정, 삭제 기능으로 설계해줘.
+프로젝트에서 환경설정을 효율적으로 관리할수 있는 설정 관리자 만들어줘. 다형형을 적용하고 베이스 클래스를 상속 받은 설정 클래스로 만들어줘. 설정에서는 클라이언트 프로그램에서 다양하게 설정할 수 있게 설계해줘.
+설정 관리자는 모듈별 설정을 관리 할수 있도록 해줘. 예를 들어 통신 모듈은 소켓 통신, 시리얼 통신 관련 설정, 파일 모듈은 파일 삭제 주기 등. 
+
+BGA ball 검사를 위한 제품 정보 설정이 필요해요. 프로젝트에서 제품 정보를 효율적으로 관리할수 있는 제품 관리자 만들어줘.
+다형형을 적용하고 베이스 클래스를 상속 받은 제품 클래스로 만들어줘. 
+제품 정보는 substrate 이고 윈도우 갯수, 각윈도우 가로 세로 유니트 배열, 유니트 피치, 윈도우 피치를 설정할 수 있도록 설계해줘.
+유니트 정보는 ball arrary (x, y), ball size, ball pitch 설정도 설계해줘.
+
+프로젝트 관리를 위해 Vision 관련 내용은 라이브러리 프로젝트로 생성하여 관리하게 설계해줘.
+예를 들어 Lib_Image, Lib_ImageGrabber, Lib_Insp_D2D, Lib_Insp_Base, Lib_Blob, Lib_Matching, Lib_Mopology, Lib_PreProcess.
+
+프로젝트 관리를 위해 Vision Ball inspection 관련 내용은 라이브러리 프로젝트로 Lib_InspBall로 생성하여 관리하게 설계해줘.
+Lib_InspPipeline 라이브러리 프로젝트를 Lib_InspBall로 변경 하는게 좋을 것 같아.
+참고로 이후 추가할 마킹 검사는 Lib_InspMark로 만들거야.
+
+프로젝트 관리를 위해 Vision Image processing 관련 내용은 라이브러리 프로젝트로 VDeveloper로 생성하여 관리하게 설계해줘.
+또한 이름은 아래와 같이 변경해줘.
+Lib_Image -> VImage, Lib_ImageGrabber -> VImageGrabber, Lib_Blob -> VBlob, Lib_Matching -> VMatching, Lib_Mopology -> VMopology, Lib_PreProcess -> VFilter, Lib_Insp_Base -> VInspBase, Lib_Insp_D2D -> VInspD2D
+VDeveloper로 VImage, VImageGrabber, Lib_Blob, VInspD2D, VMatching, VMopology, VFilter, VInspBase 내용을 이동 하는게 좋을 것 같아요.
+
+VInspBase, VInspD2D 들은 각 Inspection 모듈 (Lib_InspBall)로 이동 하는게 좋을 까요? 검토해 주세요.
+
+검사 모듈 Lib_InspBall, Lib_InspMark, Lib_InspReadcode, Lib_InspMeasurement, Lib_InspPosition의 각 실행 결과를 보관하고 SmartVisionApp 프로젝트의 UI에 표시하기 위한 구조 설계 검토해줘.
+
+
+ROI 영역 BGA 검사 클릭시 처리
+아래 처리 과정 검토하고 더 좋은 방법이 있다면 추천해줘.
+
+
+이미지 전처리 알고리즘
+설정한 ROI 영역을 reduce domain 한다.
+이진화
+모폴로지 적용
+connection
+Blob 알고리즘 적용
+Ball 외곽에 red 색상으로 circle 표시하기
+
+설계하신 reduce domain → 이진화 → 모폴로지 → 연결(윤곽) → 블롭 순서는 현재 OpenCV 파이프라인과 동일합니다.
+빨간 원은 현재는 상태별 색상이라, “검출만 전부 빨강”이 필요하면 표시 옵션을 추가하는 것이 좋습니다.
+효과 대비 비용이 좋은 개선은 ROI Mat 뷰로 복사 줄이기, 원형 모폴로지·반복 횟수 옵션, 오버레이 색/안티앨리어싱입니다.
+원하시면 다음 단계로 (A) 검출 원만 전부 빨강 + 설정으로 토글 또는 (B) ROI를 Mat.Roi로 바꾸는 리팩터 중 어디부터 코드에 반영할지 정해 주시면 그에 맞춰 수정안을 제안하겠습니다.
+
+Lib_DotCal 라이브러리 프로젝트를 만들고 Dot 이미지를 이용하여 로딩 이미지의 미리미터 좌표계들 만들어줘. 
+
+이미지를 활용한 Calibration 방법 설명해줘. 바둑판 형태의 캘리브레이션 이미지를 로딩해서 미리미터 좌표로 변환하려고해.
+
+첨부 문서는 다른 장비 업체 비전 메뉴얼로 참고해 주세요.
+
+먼저 레시피 시스템 구성하려고 해
+레시피 파일은 Json 형식이고 아래 정보로 레시피를 먼저 만들어줘.
+제픔 타입은 계속 추가 예정이야.
+Recipe 폴더는 실행 파일 위치로 이동해야 될 것 같아요. PathManager에서 경로 관리될 수 있도록 해줘.
+
+레시피 폴더 구조는 Product -> Substrate -> Strip Size -> recipe name 
+                 
+
+파일 이름 74_3win_4x2_32LD_0.25_0.4.json
+
+PropertyGrid 카테고리 헤더 설정을 아래와 같이 배정해 주세요.
+1) Product Info → 2) Product Type → 3) Strip Info → 4) Unit Info → 5) PKG Info
+
+1) 카테고리 헤더: Product Type
+Recipe: 현재 Recipe Name으로 설정
+Product : Substrate
+
+2) 카테고리 헤더: Strip Info
+Strip Size: 74
+Window Count: 3
+Window Pitch: 78.8
+
+3) 카테고리 헤더: Unit Info
+Unit Array (X/Y): 17,28
+Unit Pitch (X/Y): 4.25,2.25
+Unit Count (W): 476
+Unit Count (3W): 1428
+
+4) 카테고리 헤더: PKG Info
+PKG Size (X/Y): 4,2
+Ball Array: 8,4
+Ball Count: 32
+Ball Size: 0.25
+Ball Pitch: 0.4 
+
+검사 설정
+PropertyGrid 카테고리별 헤더 설정
+
+1) 검사 항목
+01 Ball Missing: Ebable, Disable
+02 Ball Size: Ebable, Disable
+03 Ball Pith: Ebable, Disable
+04 Ball Bridge: Ebable, Disable
+05 Ball Damage: Ebable, Disable
+06 Ball Discolor: Ebable, Disable
+
+2) 검사 스펙
+01 Ball Missing: Ball count와 동일 여부 판정
+02 Ball Size 기준(mm): 
+03 Ball Size 허용오차(Min)
+04 Ball Size 허용오차(Max)
+05 Ball Pitch 기준 (mm)
+06 Ball Size 허용오차(Min)
+07 Ball Size 허용오차(Max)
+08 Ball Bridge: 추후 설정
+09 Ball Damage: 추후 설정
+10 Ball Discolor: 추후 설정
+
+3) Threshold
+01 Low: Ball 영역 Threhold 최소값 
+02 High: Ball 영역 Threhold 최대값
+03 Avg: Ball 영역 Threhold 평균값
+
+2) 검사 스펙
+Ball Missing: Ball count와 동일 여부 판정
+Ball Size: Ball Size 기준 +0.05 / -0.05
+Ball Pith: Ball Pitch 기준 +0.05 / -0.05
+Ball Bridge: 추후 설정
+Ball Damage: 추후 설정
+Ball Discolor: 추후 설정
+ 
+
+첨부 이미지는 레시피 관리 윈폼 입니다. 
+윈폼 디자인을 아래와 같이 변경해줘. 윈폼 크기는 컬럼 내용 고려하여 150% 늘려줘.
+컬럼 : No, Recipe File Name (확장자 제외), Create Date (Year-Month-Day-Time) 
+
+첨부 이미지 디자인을 아래와 같이 변경해줘
+이미지 로드, 설정, 레시피는 메뉴로 이동.
+검사 시작 버튼은 우측 아래에 단독으로 배치.
+시스템 준비 완료 레이블, 프로그레스바 삭제.
+현재 레시피를 표시할 수 있도록 Current Recipe 레이블, Recipe Name을 텍스트 박스 수정 불가로 만들어줘.
+프로그램 시작 시 종료 전 Recipe로 설정할 수 있도록 구성해줘. 
+
+UI 디자인 변경
+Visual Studio 스타일 적용하여 기능별 개별 윈도우 형태로 도팅 가능하도록 변경.
+개별 윈도우을 표시할 수 있는 View 메뉴 추가하고 아래 항목을 추가한다.
+View 메뉴 밑에 Docking Windows -> ImageViewer, ProductViewer, ControlViewer, SubstrateViewer, InspResultViewer, LogViewer 배치하고 동작 연결해줘. 
+
+1. ImageViewer: 이미지 출력 윈도우
+2. ProductViewer: Product 윈도우
+   Panel에 Current Recipe 표시 배치
+3. ControlViewer: Control 윈도우
+   Panel에 검사 버튼 배치
+4. SubstrateViewer: Substrate 윈도우
+5. InspResultViewer: 검사 결과 윈도우
+6. LogViewer: 시스템 로그 윈도우 
+
+View 메뉴 밑에 Docking Windows -> ImageViewer, ProductViewer, ControlViewer, SubstrateViewer, InspResultViewer, LogViewer, LogEngViewer 배치하고 동작 연결해줘.
+
+먼저 MainForm의 모든 디자인을 지우고
+MainForm의 pictureBoxImage 의 모든 내용을 포함하는 ImageViewerForm을 새로 만들어야 될 것 같아요.
+ImageViewer 윈도우는 크기 조정, 도킹 가능하도록 해 주세요.
+ImageViewer 마우스로 이동 배치 할 수 있는 타이틀 영역이 보이지 않아요.
+pictureBoxImage
+UserControl로 전환해 주세요.
+
+메뉴 View 밑에 UI Lock 메뉴를 만들고 토글 기능으로 ImageViewer 윈도우 Lock, Unlock 적용해줘.
+메뉴 View 밑에 UI Lock 메뉴를 클릭 시 토글 기능으로 SubstrateViewer, LogViewer, ProductViewer 윈도우 Lock, Unlock 적용해줘. ImageViewer 윈도우는 정상 적용되어 있어요. 참고 하세요.
+
+
+SubstrateViewerForm을 만들고 첨부 이미지와 같은 Substrate 적용해줘.
+SubstrateViewerForm에 Substrate panel을 만들고 Window Count가 3개 이므로 Substrate panel 안에 Window panel 3개를 만들고 각 Window panel 에 Window 당 Unit Array (X/Y): 17,28에 맞게 파란색 사각형을 배치해줘.
+Window Count: 3
+Window 당 Unit Array (X/Y): 17,28
+사각형 갱신시 깜박임 발생되지 않게해줘.
+
+SubstrateViewer UI Lock 상태에서 도킹 가능해요. 다시 확인해 주세요.
+
+ProductViewerForm을 만들고 Panel을 만들고 안에 Current Recipe 레이블, RecipeName 텍스트 박스 컨트롤 배치해줘.
+
+코드 보기, 디자이너 보기 팝업 메뉴가 보이지 않아요. 혹시 ProductViewerForm이 유저 컨트롤로 생성되어서 보이지 않는 것인지 확인해 주세요.
+
+ProductViewerForm을 내가 직접 추가 했어요. Panel을 만들고 안에 Current Recipe 레이블, RecipeName 텍스트 박스 컨트롤 배치해줘.
+
+SubstrateViewerForm을 내가 직접 추가 했어요. 
+첨부 이미지와 같은 Substrate 적용해줘.
+SubstrateViewerForm에 substratepanel에 Window Count가 3개 이므로 Substrate panel 안에 Window panel 3개를 만들고 각 Window panel 에 Window 당 Unit Array (X/Y): 17,28에 맞게 파란색 사각형을 배치해줘.
+Window Count: 3
+Window 당 Unit Array (X/Y): 17,28
+사각형 갱신시 깜박임 발생되지 않게 더블 버퍼링 적용해줘.
+
+ImageViewerForm을 내가 직접 추가 했어요.
+pictureBoxImage 이미지 출력 내용 추가해 주세요.
+
+LogViewerForm을 내가 직접 추가 했어요.
+logpanel에 이전에 구현 했던 관련 내용 추가해 주세요.
+
+C:\Amkor\Vision\CSharp\SmartVisionApp_r5_Setting
+첨부 이미지 참고 하세요. ROI 박스가 2개 나타나고 마우스 드레그 시 끈김 현상 발생 되요. 아래는 이전에 정상적으로 구현한 참고 프로젝트 경로 입니다. C:\Amkor\Vision\CSharp\SmartVisionApp_r5_Setting
+
+UI Lock 상태에 따라 ProductViewer, SubstrateViewer, LogViewer 반영되게 해줘. ImageViewer는 정상 동작하고 있어요. 설정 참고 하세요.
+
+첨부 이미지와 같이 ProductViewerForm의 labelCurrentRecipe이 보이지 않아요. textBoxRecipeName 항상 수평으로 같은 위치에 있도록 설정해 주세요.
+
+ProductViewerForm의 디자인이 도킹 화면에 반영이 되지 않는 것 같아요. MainForm의 도킹 로직에서 강제하고 있는 것 같아요. ProductViewerForm의 디자인이 정상적으로 반영될 수 있도록 개선해 주세요.
+MainForm이 Product 영역 UI를 직접 생성하는 부분을 ProductViewerForm 호스팅 방식으로 바꿔서 디자이너가 그대로 반영되게 수정해줘.
+MainForm에서 ImageViewerForm, SubstrateViewerForm, LogViewerForm도 직접 생성하고 있는지 확인하고 수정해줘.
+
+첨부 이미지 ProductViewerForm의 우측에 버전 정보, 현재 시간을 표시한는 label 추가해줘.
+현재는 panelProduct 에 레시피 라벨 2개 수평 배치되어 있어요. 버전 label, 현재 시간 label을 동일 수평 라인으로 배치하는 방법 알려 주세요.
+4개 항목을 동일 선상으로 배치하는 방법 추천해 주세요.
+ProductViewerForm 윈도우 크기를 가로, 세로로 크게 확대화면 나타나는 것 같아요. 위도우 사이즈에 맞게 4개 레이블의 크기, 위치가 변동되어야 합니다.
+도킹 시 창 크기가 커질 때 4개 라벨 폭/위치가 비율대로 재배치되도록 TableLayoutPanel column style을 % 기반으로 조정
+라벨 바 높이를 기존(약 43px)처럼 고정하고, 세로로는 늘어나지 않게
+
+View 메뉴 밑에 Docking Windows ->LogEngViewer을 LogViewer 다음에 추가하고,
+내가 직접 생성한 LogImgProcViewerForm 연결 및 관련 코드 추가해 주세요. 
+
+MainForm이 LogEngViewerForm 영역 UI를 직접 생성하는 부분이 있는지 확인해줘.
+사용자가 만든 LogEngViewerrForm을 DockPanel Suite에 기존 Viewer들과 동일한 방식으로 호스팅하도록 연결했습니다.
+레이아웃 저장/복원(persist id) 포함
+UI Lock 적용 대상 포함
+종료 시 DockContent에서 분리 후 Dispose 포함 (Forms\MainForm.cs, Forms\MainForm.DockUi.cs)
+
+일반적인 오퍼레이션, 검사 결과, 이벤트는 LogViewer 출력하고 이미지 처리 관련 로직은 LogEngViewer에 출력 하도록 분리 해줘.
+LogImgProcViewer을 LogEngViewer로 LogImgProcViewerForm은 LogEngViewerForm으로 모두 변경해줘.
+
+Log 시스템 관리를 위해 LogManager를 만들고 일반적인 오퍼레이션, 검사 결과, 이벤트는 LogViewer 출력하고 이미지 처리 관련 로직은 LogEngViewer에 출력 하도록 분리 해줘.
+모든 로그는 [년-월-일-시-분-초] 로그 내용으로 기혹하고 로그 파일은 날짜별 1개만 생성하고 텍스트 파일로 저장하게 해줘. 모든 로그 파일은 6개월 이상 로그는 자동 삭제할 수 있도록 해줘.
+LogViewerForm, LogEngViewerForm은 생성 했어요.
+다음부터 모든 Form은 유저가 생성하도록 먼저 안내하고 필요한 세부 컨트롤도 상세히 알려주게해줘. 생성 여부 확인하고 다음 진행해줘.
+
+현재 프로젝트는 BGA Ball 검사를 위한 클라이언트 프로그램 개발 입니다 (2D Rule‑based)
+Opencv, Intel PPI, Emgu open source를 사용하여 개발하고 있어요.
+
+아래 폴더의 프로젝트 SVMBall은 Euresys 업체의 open evision 유료 라이센스 라이브러리를 사용하였습니다.
+먼저 Ball 검사 관련 알고리즘, 이미지 전처리, 구현, 로직, 검사 방법, 항목, 스펙 등을 세부적으로 파악하고 SmartVisionApp 프로젝트에 Opencv, Intel PPI, Emgu open source을 사용하여 대체 개발 적용해줘.
+Open evision에서 사용한 라이브러리 코드를 Opencv, Intel PPI, Emgu open source로 변경해줘.  
+C:\Amkor\Vision\CSharp\SmartVisionApp\TEPAS10_20210502\SVMBall
+
+
+74_3win_4x2_32LD_0.25_0.4
+
+labelRecipeFileName이 아래 경로의 파일을 가지고 와서 표시 하는지 확인해 주세요.
+C:\Amkor\Vision\CSharp\SmartVisionApp\bin\Debug\net462\win-x64\Recipes\Product\Substrate\74
+
+구조는 알고리즘 본체는 VDeveloper에 구현, Lib_InspBall은 오케스트레이 구현
+
+ROI 영역 BGA 검사 클릭시 수행되는 세부 처리 단계 자세히 설명해줘.
+
+제가 이해하고 있는 Ball missing 검사 로직을 아래와 같이 정리 합니다. 확인해 주세요.
+
+Step1: ROI 영역을 crop 한다.
+Step2: 이미지 전처리 이진화 처리 (Threshold 최소, 최대, 평균) -> 설정 값 표시
+Step3: 이미지 전처리 다일레이션(Dilation)**과 **이로전(Erosion) 실행 여부 -> 설정 값 표시
+Step4: 이미지 전처리 컨넥션(Connection) 실행 여부 -> 설정 값 표시
+Step5: 이미지 전처리 라벨링(Labeling) 실행 여부 -> 설정 값 표시
+Step6: Blob 검사 (Area, circularity, position, 형태 등) 기하학적 특성 (Geometric Features), 형태 특성 (Shape Features), 위치 특성 (Position-based) 실행 여부 -> 설정 값 표시
+Step7: 조건 비교 (Spec) 실행 여부 -> 설정 값 표시
+Step8: 판정 (OK / NG)
+
+
+전체 이미지 검사(InspectionManager) 경로를 아래와 같이 정리해줘.
+
+ROI 이미지
+   ↓
+전처리 (Noise 제거, 필터)
+   ↓
+이진화 (Threshold)
+   ↓
+컨넥션 정의 (4 / 8)
+   ↓
+Blob 라벨링
+   ↓
+Blob 특징 추출
+   ↓
+조건 비교 (Spec)
+   ↓
+판정 (Pass / Fail)
+
+
+BGA Ball 검사의 세부 파라메서 설정 폼을 만들어서 세부 parameter를 설정할 수 있게 하는게 좋을 것 같아요. 검토해주고 폼 디자인 알려줘.
+
+2D Rule‑Based Blob 검사 전체 구조
+[Input Image]
+      ↓
+Pre-Processing
+(필터, 조명보정)
+      ↓
+Binarization (Threshold Rule)
+      ↓
+Morphology Rule
+(Erosion / Dilation)
+      ↓
+Connectivity Rule
+(4 or 8)
+      ↓
+Blob Labeling
+      ↓
+Feature Measurement
+      ↓
+Decision Rule
+(Pass / Fail)
+
+
+
+
+
+
+대표 조합
+이로전 → 작은 노이즈 제거
+다일레이션 → 끊어진 Blob 연결
+오프닝 → 미세 Particle 제거
+클로징 → Hole 메움
+
+👉 Blob 결과의 안정성 확보 목적
+  
+✅ 1) Particle 검사
+
+작은 고립 Blob 검출
+Area + 개수 기준
+
+✅ 2) Void 검사
+
+패드 내부 Blob만 필터링
+Area Ratio 분석
+
+✅ 3) Pattern Bridge
+
+연결된 Blob 크기 분석
+이로전으로 브릿지 강조
+
+✅ 4) Scratch / Crack
+
+Elongation 높은 Blob 검출
+
+2D Rule‑based 적용을 위한 세부 조건
+5) OpenCV 파이프라인 옵션
+01 PreprocessorKind / BlobDetectorKind / GridMatcherKind: GrayOpenCv, Contour, RoiBallGrid
+02 GaussianKernelSize: 5
+03 UseClahe: True, ClaheClipLimit: 2.050, ClaheTileSize: 8
+04 AdaptiveBlockSize: 35, AdaptiveC: -5.00
+05 BallsAreBright: True
+06 BallRegionThresholdLow/High: 0.0 / 255.0
+07 MorphOpenKernel / MorphCloseKernel: 3 / 3
+08 MinAreaPx / MaxAreaPx: 40 / 80000
+09 MinCircularity: 0.350
+10 PixelsToMmScale: 0.250000
+11 UseSubPixelCentroid: True, UseCornerSubPix: False, UseEllipseFitRefinement: False
+12 SubPixWindowHalfSize: 5, SubPixZeroZoneHalfSize: -1
+13 PreferIntelIppBackend: False
+
+실행 파일 위치에 Calibration 폴더를 만들고 캘리블레이션 데이터를 Json으로 저장하게해줘. 프로그램 실행 시 다시 읽어 시스템에 반영해 주고.
+Run Calibration 클릭 시 ImageViewer에 ROI 박스를 하나 출력하고 설정한 영역을 기준으로 한개 픽셀 크기를 추정하게 하는 건 어때요?
+예를 들어 Ball size는 0.25 Ball Pitch는 0.4 Unit Pitch (X/Y): 4.25,2.25 입니다. 네가 이미지에서 ROI로 11 * 16 = 176개 unit를 제공하면 될 것 같아요.
+
+ImageViewer 화면 안에 마우스가 있을 경우 그위치의 이미지 좌표. 그레이 값을 ImageViewer 화면 하단에 표시해줘.
+
+Manual Calibration에서 Run Calibration 클릭 시 ImageViewer에 ROI 박스 영역을 확인하여 Ball size, Ball pitch, Unit pitch (X/Y) Unit Array 갯수을 토대로 최종 한개 필셀 크기를 구하는 로직 구현해줘.
+
+Manual Calibration에서 Run Calibration 클릭 시 ImageViewer에 ROI 박스 영역에 접근할 수 없어요.
+
+Manual Calibration 로직을 아래와 같이 변경 검토해 주세요.
+Manual Calibration에서 Run Calibration 클릭 시 ImageViewer에서 이미지를 확대하여 마우스 왼쪽 버튼을 클릭하여 십자 점을 찍을 수 있도록하고 2점이 확정되고 실거리를 유저가 제공 시 2점 X/Y좌표 기준 한개 픽셀 크기를 um으로 계산하는 방법은 어떨까요?
+
+Lib_Calibration 라이브러리 프로젝트를 생성하고 Calibration 관련 코드를 라이브러리화 해주세요.
+
+현재 프로젝트는 BGA Ball 검사를 위한 클라이언트 프로그램 개발 입니다 (2D Rule‑based)
+Opencv, Intel PPI, Emgu open source를 사용하여 개발하고 있어요.
+
+첨부 폴더의 프로젝트 SVMBall은 Euresys 업체의 open evision 유료 라이센스 라이브러리를 사용하였습니다.
+먼저 Ball 검사 관련 알고리즘, 이미지 전처리, 구현, 로직, 검사 방법, 항목, 스펙 등을 세부적으로 파악하고 SmartVisionApp 프로젝트에 Opencv, Intel PPI, Emgu open source을 사용하여 대체 개발 검토해줘.
+Open evision에서 사용한 라이브러리 코드를 Opencv, Intel PPI, Emgu open source로 변경해줘. 먼저 Ball Missing, Ball Size 관련 내용부터 검토해줘. 
+C:\Amkor\Vision\CSharp\SmartVisionApp\TEPAS10_20210502\SVMBall
+SVMBall 프로젝트의 CDlgMenu::OnBtnImageinsp()는 검사 시작 지점 입니다.
+
+Manual Calibration에서 Run Calibration 클릭 시 ImageViewer에서 이미지를 확대하여 마우스 왼쪽 버튼을 클릭하고 우측 버튼 클릭시 확정하면 십자 점을 찍을 수 있도록하고 다시 줌, 이미지 이동을 통해 2점이 확정되될 수 있도록 수정해줘. 2번째 점 찍을 때 줌, 이미지 이동을 할 수 없어서 어려움이 발생되요. 
+
+Manual Calibration에서 Run Calibration 클릭 시 ImageViewer에서 이미지를 확대하여 마우스 우측 버튼 클릭시 팝업 메뉴에서 Calibration Mark하기 클릭하면 왼쪽 버튼으로 십자 점을 찍을 수 있도록하고 다시 줌, 이미지 이동하고 다시 우측 버튼 클릭 시 팝업 메뉴에서 Calibration Mark하기 클릭하면 왼쪽 버튼으로 점을 찍을 수 있도록 변경.
+
+18.849129
+Unit간 X 피치는 4.25mm 입니다. 이미지에서 Manual Calibration에서 Run Calibration 클릭 시 2점간 픽셀 수에 개당 픽셀 크기 um을 곱하면 4.25mm가 나와야 합니다
+
+LoginManager 개발
+Login 시스템을 만들고 접속자 ID Operator, Maint, Admin 을 만들고어줘. 기본 defaul는 Operator이며 레벨 접속 권한에 따라 기능을 부여 하려고 해.
+LoginForm 디자인 알려 줘. Login ID 기본 설정은 3가지 (Operator, Maint, Admin)를 선택할 수 있는 콤보 박스와 Passwaor 입력할 수 있게 해줘.
+Password 초기 설정은 Operator: 1111, Maint: 2222, Admin: 7777 입니다. Password는 변경 가능하게 설정해줘.
+
+FunctionManager 개발
+접속 레벨에 따라 기능을 제한 하려고 해 우선 아래 기능에 대해 접속 권한 부여하게 설계해줘.
+1. 메뉴 -> View -> Docking Windows: Admin 레벨만 활성하고 그외는 모두 비활성
+ 
+[2026-03-27-10-32-15]   [0,0] → (97.67, 39.11, 0.2711, Ball Pitch X 값, Ball Pitch Y 값)
+[0,0] → (Ball X, Ball Y, Ball Size, Ball Pitch X, Ball Pitch Y)
+이제 출력은 아래처럼 표시됩니다:
+
+검사 설정에 따라
+현재 엔지니오 로그에 출력되고 있는 내용은 모두 정리하고 아래와 같이 출력되게 해주세요.
+[0,0] → (Ball X, Ball Y, Ball Size, Ball Pitch X, Ball Pitch Y)
+실제 예시: [0,0] → (97.67, 39.11, 0.2711, 0.2698, 0.2702)
+
+3번째 값: Ball Size (DiameterMm)
+4번째 값: Ball Pitch X
+5번째 값: Ball Pitch Y
+매칭 실패 시: (..., N/A, N/A, N/A) 표시
+
+SVMBall 프로젝트에 있는 모든 검사 항목과 판정 로직을 상세히 확인하여 SmartVisionApp 프로젝트에 구현해줘.
+SmartVisionApp 솔루션의 모든 코드를 확인하여 VDeveloper, Lib_Ball, 등 라이브러리 프로젝트와 SmartVision 프로젝트로 솔루션 구조에 맞게 정확하게 구분하여 구현해줘. 
+
+아래 누락:0 | 불량:0 순서가 바뀌어야 될 것 같아요. 아래 항목 중 1개라고 불량이 있다면 불량으로 처리해야 합니다. 누락:0, 사이즈불량:0, 피치불량:0 
+[2026-03-27-12-41-32] [ROI] 검사 결과: Pass | 총:32 | 정상:32 | 누락:0 | 불량:0 | 사이즈불량:0 | 피치불량:0 | 피치(mm):X=0.4012,Y=0.4024 | 피치위반:False
+
+InspResultMainForm은 Lot 전체 검사 결과를 표시하는 용도 입니다. 예를 들어 1 랏트는 50 Substrate로 구성되어 있다면 1개 substrate 검사 결과를 집계 합니다.
+현재 레시피 구조 처럼 74mm Substrate는 3개 윈도우 윈도우당 Unit 개, 전체 3개 윈도우에 Unit 개에 대해 검사 결과가 1개라도 불량일 경우 불량으로 집계하고 랏트 전체 Substrate 50 중 1개 불량으로 집계 합니다.
+InspResultSubForm
+
+InspResultMainForm을 직접 생성 했어요. Docking 관련 코드 연결해줘.
+
+최소 연결만 하는 방법
+MainForm.DockUi.cs에서 필드 추가
+private InspResultMainForm _inspResultMainForm;
+_dockInspectionResult 생성부에서 폼 임베드
+기존:
+_dockInspectionResult.Controls.Add(groupBoxResults);
+변경:
+_inspResultMainForm = new InspResultMainForm { Dock = DockStyle.Fill };
+HostViewerFormInDockContent(_dockInspectionResult, _inspResultMainForm);
+MainForm.cs 종료 정리에 detach/dispose 추가
+DetachViewerFormFromDockContent(_dockInspectionResult, _inspResultMainForm);
+_inspResultMainForm?.Dispose();
+_inspResultMainForm = null;
+InspResultMainForm.cs는 생성자만 유지
+InitializeComponent() 구현은 Designer.cs에만 남기기 (중복 제거)
+
+
+
+
+
+좋습니다. 아래는 새 뷰어 1개를 View -> Docking Windows에 추가할 때 필요한 최소 수정 체크리스트 10개입니다.
+(현재 프로젝트 구조 MainForm.Designer.cs + MainForm.DockUi.cs 기준)
+
+View 메뉴 밑에 Docking Windows -> 밑에 있는 모든 뷰어와 연결하는 뷰폼 연결 방식을 확인하고 정리해 주세요.
+
+
+InspResultSubForm을 InspResultSubViewerForm로 변경해줘.
+SVMBall 프로젝트에서 티칭한 이미지를 검사 대상 이미지와 매칭 검사 도는 메트릭스 검사하는지 확인해줘.
+SVMBall 프로젝트에서 티칭한 이미지를 별도 저장하여 레시피로 관리하는지 확인해줘.
+
+볼 위치/그리드 매핑
+
+아래와 같이 티칭 완료한 이미지를 레시피로 관리하고 해당 제품 폴더에 저장하고 ROI 티칭 검사와 자동 검사에 사용할 수 있도록 구현해줘.
+
+패턴 매칭(매칭)
+사용합니다. 티칭 때 저장·로드한 EMatcher(.mch / 패턴 BMP로 학습) 를 써서 자동 검사 시 라이브 ROI 이미지에 대해 매칭합니다.
+
+“매트릭스 검사”
+대신 볼 검사는 티칭에서 만든 객체 맵(ObjMap.map → pstuObjFeature) 과 현재 블롭 검출 결과를 맞추는 DetectFeatureGroup 등으로 그리드/그룹 단위 검사(Missing, Bridge, Extra 등) 를 합니다. 말하는 “매트릭스”가 볼 위치 그리드 매핑이면 이 흐름이 해당합니다.
+
+ROI 영역 BGA 검사
+SVMBall 프로젝트 Ball 검사 로직 다시 분석해 보세요.
+
+제가 이해하는 검사 로직은 아래와 같습니다. 검토해 주세요.
+검사 실행하면 검사 영역에서 Train 폴더의 pattern 이미지 Blob을 이용하여 Ball을 찿고 티칭 reference 이미지를 바탕으로 BgaRoiGridMatcher 검사하고 Missing, Size, Pitch...등을 검사 합니다.
+
+Damage: DetectFeatureMatch(Data[4]) 대응 여부
+메뉴 -> 설정 -> ROI 설정을 추가 했어요. 추가한 ROISettingForm을 CalibrationForm 처럼 모달리스로 생성하게해 줘.
+
+ROI SettingForm을 추가 했어요. 아래 설정해 주세요. 레시피에 항목 추가해 주세요.
+textBoxUnitStartPosX에 검사 ROI의 중심 좌표 X
+textBoxUnitStartPosY에 검사 ROI의 중심 좌표 Y
+textBoxUnitSizeX에 검사 ROI X 크기
+textBoxUnitSizeY에 검사 ROI Y 크기
+
+MatrixCheck 버튼 클릭시 검사 ROI Start 좌표 기준으로 제품 정보 데이터를 참고하여 이미지뷰 영역에 노란색 ROI 그려줘.
+유닛 배열 (X), 
+유닛 배열 (Y),
+유닛 피치 (X),
+유닛 피치 (X)
+
+InspMatrix 좌표 데이터는 프로그램 실행시 로딩하고 검사 Matrix 설정에서 저장 시 업데이트 될 수 있도록 해줘.
+검사 실행 버튼 클릭 시 InspMatrix 데이터 좌표를 순서데로 검사를 진행하고 결과를 유니트 단위로 이미지 뷰의 해당 유니트에 표시해줘.
+
+첨부 이미지와 같이 InspMatrixForm에 검사 방향 옵션을 추가 했어요.
+InspDirection 옵션을 만들어서 아래와 같이 설정해줘.
+radioButtonDir1: 좌->우 (정방향) : 검사 순서는 좌에서 우로 한 행이 끝나면 다시 좌에서 우로 진행
+radioButtonDir2 좌->우 (역방향) : 검사 순서는 좌에서 우로 한 행이 끝나면 다음 행의 역방향으로 진행
+
+검사 실행 시 결과는 검사 완료후 이미지뷰에 한번만 출력하고 Unit 검사 결과는 SubstrateView의 Array 배열 사각형의 color를 Pass는 그린, 불량은 Red로 표시해줘. 
+
+검사 실행시 처음 속도는 빠르게 진행되는데 뒤로 갈수록 점점 느려지는 문제가 있어요. 중복 로직이나, 다른 문제가 없는지 다시 확인해 주세요. 획기적인 속도 개선이 필요해요.
+LogEngViewer를 비동기 또는 별도 스레드로 처리하고 있는지 확인해 주세요.
+
+BlobGrayMeanFilterMin 파라미터를 추가
+설정 > 검사 설정 → 5) OpenCV 파이프라인 옵션 > 14 BlobGrayMeanFilterMin 에서 값
+활성 레시피에 저장
+
+보라색은 ExtraBall(여분 볼)에 배정한 MediumPurple입니다. 
+
+BGA Ball 검사 로직
+ROI 영역을 crop -> Blob -> Ball 영역을 찿고 Ball 영역의 이진화 처리 후 Gray 값을 찿고 밝은 영역의 픽셀 면적 또는 갯수를 계산
+
+pattern
+
+검사 결과를 아래와 같이 Unit 합산으로 출력해 주세요. 아래는 예시 입니다. 
+[2026-03-30-12-58-56] 검사 완료: 검사 결과: Fail, 검출: 166/176, 정상: 166 (Unit), 불량 (Unit): 10, 누락 (Unit): 10, 피치불량 (Unit): 5, 품질점수: 0.0%
+
+첫번째 이미지는 불량으로 검출한 이미지 입니다. 2번째 이미지는 첫번쩨 이미지의 우측 하단의 3개볼 이미지로 실제 볼은 없고 Pad 만 보이는 상황으로 Pad에 녹색 원이 표시되어 있습니다. 볼로 인식한 것 같습니다. 볼로 인식도지 않도록 알고리즘 다시 확인해 주세요.
+
+레시피의 Train 폴더의 reference 이미지를 전처리하여 최외곽 볼영역 맞는 사각형을 그리고 행,열로 파티션하고 개별 볼영역을 맵핑하게 맏들고 이것을 볼검사에 활용하는 건 어때요? 3번째 첨부이미지와 같이 Missing ball을 표시하는 빨강색 원이 엉뚱한데 그려지지 않게 하기 위해서 입니다. Ball Pitch, Position 검사 시 기준이 될 수 있을 것 같습니다.
+추가로 티칭 BGA Ball 검사 클릭시 이미지뷰 화면에 볼영역 외곽 사각형과 격자선를 표시하는게 좋을 것 같아요. 검사 실행 완료에서는 표시하지 않습니다.
+첨부 이미지와 같이 Ball missing 표시 원이 잘못된 위치에 표시 되었습니다. Recipe -> Train 폴더의 reference 이미지의 Ball의 중심 좌표를 기준으로 Ball missing red color 원이 그려줘야 합니다.
+
+먼저 레시피의 Train 폴더의 reference 이미지를 전처리하여 볼영역 외곽에 맞는 사각형을 마우스 우측 버튼 BGA Ball 검사 클릭시 이미지뷰 화면에 볼영역 외곽 사각형을 표시해 줘.
+자홍색 박스는 4행, 8열 Ball 외곽에 맞게 그려져야 합니다.
+검사 실행 시 자홍색 박스의 중심 좌표를 Matrix에 저장된 각 Unit 중심 좌표에 맞추고 검사 로직을 진행하게 해 주세요.
+만약 불량이 발생 되었다면 첨부 이미지와 같이 각 Unit의 4행, 8열 볼의 중심 좌표 또는 Train의 reference 이미지로 만든 행열 좌표를 참고하여 표시해야 됩니다.
+
+제품 폴더에 BGA 티칭 저장 클릭 시 레시피의 Train 폴더의 reference 이미지에 자홍색 박스와 4행, 8열 Ball 외곽에 맞게 바운딩 박스를 그려 주세요.
+
+이미지 좌표와 reference_annotated 이미지 좌표가 정확히 반영되고 있는지 확인하기 위해서,
+첨부 이미지의 Matrix Check 버튼 클릭시 Matrix 데이터에 해당되는 Unit Size의 이미지를 crop하고 crop한 이미지에서  reference_annotated에 그린 자홍색 박스를 찿고 이미지뷰에 표시해 주세요.
+
+첨부 이미지와 같이 1행의 3열에 missing ball 입니다. missing ball red 원은 reference 이미지의 1행 3열의 좌표에 그려져야 합니다.
+검사 결과를 이미지뷰에 표시할 때 먼저 각 유니트에 reference 이미지의 모든 ball 중심 좌표를 기준으로 red 원을 그리고 만약 Ball 행열에 해당하는 ball이 정상 이라면 녹색원으로 교체 해 주세요.
+
+검사 실행 시 원본 이미지에서 crop 한 이미지의 ROI 중심 좌표와 Train 폴더의 reference_annotated 이미지의 ROI 중심 좌표를 일치 시킨 후 그리드 매칭을 진행해야 될 것 같습니다.
+검사 실행 후 원본 이미지에서 결과 표시 할때 Missing 표시만 reference_annotated 이미지 좌표만 참고하여 표시하고 정상 Ball 표시는 Blob 결과로 표시 합니다.
+
+Ball missing 불량이 발생된 경우 해당 Ball 기준 주변 정상 볼 (좌, 우, 상, 하)을 파악하여 표시하게해줘. 
+
+잘못 적용되었어요. 이전 단계로 원복해 주세요.
+
+이미지뷰 영역 마우스 우측 클릭 팝업 메뉴에서 ROI 영역 BGA 검사 클릭시 ROI 영역의 이미지를 전처리하여 최 외곽 볼영역 맞는 사각형을 마젠타 색으로 그리고 사각형을 4행, 8열로 파티션하여 이미지뷰 영역에 표시하고 이미지는 레시피의 Train 폴더에 저장해줘.
+
+첨부 이미지와 같이 잘 적용 되었어요. 검사 실행 알고리즘에 적용해 주세요. 검사 실행 시 각 Unit의 Ball 검사는 행,열 파티션을 기준으로 진행 하게해 주세요. 예를 들어 Ball missing 검사는 행,열 파트션 영역을 기준으로 판정 합니다.
+검사 완료 후 이미지뷰 영역에 마젠타 파티션을 표시해 주세요.
+
+첨부 이미지와 같이 파티션 알고리즘이 각 Unit에 적용되어야 되는데 이미지 전체를 기준으로 적용 되었어요.
+Matrix에 저장된 데이터의 각 Unit의 중심 좌표를 기준으로 ROI 설정 영역에서 우측 클릭 팝업 메뉴에서 ROI 영역 BGA 검사 클릭시 ROI 영역의 이미지를 전처리하여 최 외곽 볼영역 맞는 사각형을 마젠타 색으로 그리고 사각형을 4행, 8열로 파티션 것처럼 동일하게 Unit에 적용해 적용해 주세요.
+
+첨부 이미지를 보면 각 Unit ROI 영역의 이미지를 전처리하여 최 외곽 볼영역 맞는 사각형을 마젠타 색으로 그리는 부분에 문제가 있어요. 
+이미지 참고 시 각 Unit 마다 최 외곽 볼영역 맞는 사각형 Offset 25%가 적용되어야 합니다.
+다시 확인해 주세요.
+
+Ball missing을 표시하는 red 색 원은 각 Unit의 각 행, 열의 작은 사각형 중심에 표시해 주세요.
+첨부 이미지와 같이 파티션 밖에 Red 원이 그려졌어요. 확인해 주세요.
+
+파티션 영역을 그리는 마젠타 색 선 두께를 변경하고 싶어요. 코드 위치 알려 주세요.
+matrix_inspection_rois.txt
+
+첨부 이미지 SettingForm의 검사 설정 마지막에 아래 내용 추가하고 구현해 주세요. 
+8) Matrix 설정
+01. Matrix 보기 True, False (True일 경우 이미지뷰에 현재와 같이 Matrix roi, 파티션 roi를 표시한다), False일 경우 이미지뷰에 Matrix roi, 파티션 roi는 표시하지 않고 검사에 따른 불량 유형은 동일하게 표시한다) 
+      
+지금 화면에 보이는 “녹색 큰 사각형 + OK”는 **티칭 ROI(얇은 녹색 사각형)**가 아니라, DrawMatrixUnitInspectionOverlay()가 그리는 유닛 결과 오버레이(합격=녹색) 입니다. 요청하신 대로 Matrix 보기=False일 때는 합격(녹색) 유닛 사각형만 숨기고, 불합격(빨강/주황 계열) 큰 사각형은 유지하도록 로직을 조정하겠습니다.
+
+첨부 이미지 SettingForm의 검사 설정 마지막에 아래 내용 추가하고 구현해 주세요. 
+8) Matrix View 설정
+01. Matrix 보기
+02. ROI 보기 (True일 경우 녹색 큰 사각형 + OK/NG) 보기, False일 경우 녹색 큰 사각형 + OK 숨기기)
+
+Ball Position 켜기하여 다시 확인해 보겠습니다. Ball Position 검사가 ROI 영역의 이미지를 전처리하여 최 외곽 볼영역 맞는 사각형을 마젠타 색으로 그리고 사각형을 4행, 8열로 파티션하여 만든 행, 열 사각형 중심을 기준으로 판정하는지 확인해 주세요.
+
+검사 실행 시 Unit 파티션 설정 시 Train 폴더의 bga_teaching.json 파일을 읽어 파트션 가로, 세로 크기를 반영하게 구현 해 주세요.
+
+첨부 이미지와 같이 검사 실행 시 각 Unit의 ROI 영역의 이미지를 전처리하여 최 외곽 볼영역 맞는 사각형을 마젠타 색으로 그리고 사각형을 4행, 8열로 Offset (PitchOffsetRatio) 파티션 생성 시 우측 3행, 8열 볼이 우측으로 이탈 시 파티션 가로 크기가 커지는 문제가 있어요.
+파티션의 가로, 세로 크기를 Train 폴더의 bga_teaching.json 파일의 데이터를 반영하여 제한할 수 있게 구현해줘.
+
+프로그램 실행 시 bga_teaching.json 파일 유무와 데이터 로딩이 진행되어야하며 제품 폴더에 BGA 티칭 저장 클릭 시 업데이트 되어야 합니다.
+
+이미지뷰 마우스 우측 버튼 팝업 메뉴에서 제품 폴더에 BGA 티칭 저장 클릭 시 ROI 영역의 이미지를 전처리하여 최 외곽 볼영역 맞는 사각형을 마젠타 색으로 그린 Offset (PitchOffsetRatio) 적용 사각형의 가로, 세로 크기와 중심 좌표를 활성 레시피의 Train 폴더 bga_teaching.json 파일에 추가 구현해줘. 
+
+검사 실행 시 사용하기 위해 프로그램 실행시 활성 레시피의 Train 폴더의 bga_teaching.json 파일의 아래 데이터 변수에 저장해줘.
+"offsetEnvelopeCenterX": 79.20517,
+  "offsetEnvelopeCenterY": 40.12381,
+  "offsetEnvelopeWidth": 158.410339,
+  "offsetEnvelopeHeight": 80.24762 
+
+검사 실행 시 각 Unit 검사를 아래와 같이 진행하도록 검토해줘.
+기존 ROI 영역의 이미지를 전처리하여 최 외곽 볼영역 맞는 사각형을 마젠타 색으로 그리고 사각형을 4행, 8열로 그리는 내용 대신 Matrix 데이터의 각 Unit의 중심 좌표와 아래 데이터를 이용하여 파티션 사각형을 그리고 볼과 행, 열 셀 파티션 사각형의 중심을 일치시키는 슬라이딩 로직 적용해줘. 슬라이딩 적용 시 파티션 사각형의 중심 좌표는 볼피치의 +/- 50% 이상 이동 적용할 수 없게해줘.   
+"offsetEnvelopeCenterX": 79.20517,
+  "offsetEnvelopeCenterY": 40.12381,
+  "offsetEnvelopeWidth": 158.410339,
+  "offsetEnvelopeHeight": 80.24762
+
+
+
+
+
+

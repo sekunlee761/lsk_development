@@ -1,0 +1,26 @@
+name: Enforce Project Rules
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  check-project-rules:
+    name: Check docs/001-project-rules.md
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Verify docs/001-project-rules.md exists and header
+      run: |
+        if [ ! -f docs/001-project-rules.md ]; then
+          echo "ERROR: docs/001-project-rules.md is missing. This file must always exist." >&2
+          exit 1
+        fi
+        if ! grep -Fq "001 - Project Rules" docs/001-project-rules.md; then
+          echo "ERROR: docs/001-project-rules.md does not contain required header '001 - Project Rules'." >&2
+          exit 1
+        fi
+        echo "OK: docs/001-project-rules.md present and contains required header."
