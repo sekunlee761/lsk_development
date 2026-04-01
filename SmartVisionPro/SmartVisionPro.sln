@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37111.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisionWorks", "VisionWorks\VisionWorks.csproj", "{A93295CF-6BC9-4758-9429-764878530C0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib_Core", "Lib_Core\Lib_Core.csproj", "{089FD3E3-228C-4A7F-AFB7-B6A285D08781}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A93295CF-6BC9-4758-9429-764878530C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A93295CF-6BC9-4758-9429-764878530C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A93295CF-6BC9-4758-9429-764878530C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A93295CF-6BC9-4758-9429-764878530C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{089FD3E3-228C-4A7F-AFB7-B6A285D08781}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{089FD3E3-228C-4A7F-AFB7-B6A285D08781}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{089FD3E3-228C-4A7F-AFB7-B6A285D08781}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{089FD3E3-228C-4A7F-AFB7-B6A285D08781}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C5A310E-7CBE-466E-846A-7D5ED372FF9E}
+	EndGlobalSection
+EndGlobal

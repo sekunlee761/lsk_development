@@ -1,0 +1,35 @@
+## Visual Studio
+.vs/
+**/bin/
+**/obj/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Build results
+*.apk
+*.ap_
+*.aab
+*.dll
+*.exe
+*.pdb
+*.cache
+
+## Rider
+.idea/
+
+## Database
+*.db
+*.db-journal
+
+## VS Code
+.vscode/
+
+## Visual Studio profiler
+*.psess
+*.vsp
+
+## Others
+*.vsidx
+*.log
