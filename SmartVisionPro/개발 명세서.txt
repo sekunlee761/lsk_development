@@ -1,3 +1,6 @@
+Github Copliot을 Visual studio 2022에 연결하여 사용 중 입니다. think-tool MCP 연결 방법 알려 주세요. 
+Github Copliot을 Visual studio 2022에 연결하여 사용 중 입니다. 현재 환경은 로컬 D:\GitRepos\lsk_development 아래에 SmartVisionPro 솔루션과 프로젝트가 있어요. 새로운 솔류션과 프로젝트를 추가하고 Github과 동기화하는 방법 알려 주세요.
+
 Vision 검사 프로그램을 클라이언트로 개발 명세서
 
 프로젝트 목표: 카메라를 연결하고 이미지를 획득하여 품질 검사하는 Vision 클라이언트 프로그램 개발.
